@@ -1,0 +1,12 @@
+{
+  "name": "elder-anxiety",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Late-Life Anxiety Daily Research Report",
+  "scripts": {
+    "fetch": "node scripts/fetch_papers.js",
+    "report": "node scripts/generate_report.js",
+    "index": "node scripts/generate_index.js"
+  },
+  "dependencies": {}
+}
