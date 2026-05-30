@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Elder Anxiety Daily &middot; 老年焦慮文獻日報 &middot; 2026年5月31日</title>
+<meta name="description" content="2026年5月31日 老年焦慮文獻日報，由 AI 自動彙整 PubMed 最新論文"/>
+<style>
+  :root { --bg: #f6f1e8; --surface: #fffaf2; --line: #d8c5ab; --text: #2b2118; --muted: #766453; --accent: #8c4f2b; --accent-soft: #ead2bf; --card-bg: #fffdf8; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: radial-gradient(circle at top, #fff6ea 0, var(--bg) 55%, #ead8c6 100%); color: var(--text); font-family: "Noto Sans TC", "PingFang TC", "Helvetica Neue", Arial, sans-serif; min-height: 100vh; overflow-x: hidden; }
+  .container { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 60px 32px 80px; }
+  header { display: flex; align-items: center; gap: 16px; margin-bottom: 52px; animation: fadeDown 0.6s ease both; }
+  .logo { width: 48px; height: 48px; border-radius: 14px; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; box-shadow: 0 4px 20px rgba(140,79,43,0.25); }
+  .header-text h1 { font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+  .header-meta { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; align-items: center; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; letter-spacing: 0.3px; }
+  .badge-date { background: var(--accent-soft); border: 1px solid var(--line); color: var(--accent); }
+  .badge-count { background: rgba(140,79,43,0.06); border: 1px solid var(--line); color: var(--muted); }
+  .badge-source { background: transparent; color: var(--muted); font-size: 11px; padding: 0 4px; }
+  .summary-card { background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; padding: 28px 32px; margin-bottom: 32px; box-shadow: 0 20px 60px rgba(61,36,15,0.06); animation: fadeUp 0.5s ease 0.1s both; }
+  .summary-card h2 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; color: var(--accent); margin-bottom: 16px; }
+  .summary-text { font-size: 15px; line-height: 1.8; color: var(--text); }
+  .section { margin-bottom: 36px; animation: fadeUp 0.5s ease both; }
+  .section-title { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .section-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; background: var(--accent-soft); }
+  .news-card { background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; padding: 22px 26px; margin-bottom: 12px; box-shadow: 0 8px 30px rgba(61,36,15,0.04); transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+  .news-card:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(61,36,15,0.08); }
+  .news-card.featured { border-left: 3px solid var(--accent); }
+  .card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .rank-badge { background: var(--accent); color: #fff7f0; font-weight: 700; font-size: 12px; padding: 2px 8px; border-radius: 6px; }
+  .emoji-icon { font-size: 18px; }
+  .card-header-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .emoji-sm { font-size: 14px; }
+  .news-card h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.5; }
+  .journal-source { font-size: 12px; color: var(--accent); margin-bottom: 8px; opacity: 0.8; }
+  .news-card p { font-size: 13.5px; line-height: 1.75; color: var(--muted); }
+  .card-footer { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .tag { padding: 2px 9px; background: var(--accent-soft); border-radius: 999px; font-size: 11px; color: var(--accent); }
+  .news-card a { font-size: 12px; color: var(--accent); text-decoration: none; opacity: 0.7; margin-left: auto; }
+  .news-card a:hover { opacity: 1; }
+  .utility-high { color: #5a7a3a; font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(90,122,58,0.1); border-radius: 4px; }
+  .utility-mid { color: #9f7a2e; font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(159,122,46,0.1); border-radius: 4px; }
+  .utility-low { color: var(--muted); font-size: 11px; font-weight: 600; padding: 2px 8px; background: rgba(118,100,83,0.08); border-radius: 4px; }
+  .utility-sm { font-size: 10px; }
+  .pico-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; padding: 12px; background: rgba(255,253,249,0.8); border-radius: 14px; border: 1px solid var(--line); }
+  .pico-item { display: flex; gap: 8px; align-items: baseline; }
+  .pico-label { font-size: 10px; font-weight: 700; color: #fff7f0; background: var(--accent); padding: 2px 6px; border-radius: 4px; flex-shrink: 0; }
+  .pico-text { font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .keywords-section { margin-bottom: 36px; }
+  .keywords { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .keyword { padding: 5px 14px; background: var(--accent-soft); border: 1px solid var(--line); border-radius: 20px; font-size: 12px; color: var(--accent); cursor: default; transition: background 0.2s; }
+  .keyword:hover { background: rgba(140,79,43,0.18); }
+  .topic-section { margin-bottom: 36px; }
+  .topic-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .topic-name { font-size: 13px; color: var(--muted); width: 120px; flex-shrink: 0; text-align: right; }
+  .topic-bar-bg { flex: 1; height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+  .topic-bar { height: 100%; background: linear-gradient(90deg, var(--accent), #c47a4a); border-radius: 4px; transition: width 0.6s ease; }
+  .topic-count { font-size: 12px; color: var(--accent); width: 24px; }
+  .links-section { margin-top: 48px; animation: fadeUp 0.5s ease 0.4s both; }
+  .link-card { display: flex; align-items: center; gap: 14px; padding: 18px 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: 24px; text-decoration: none; color: var(--text); transition: all 0.2s; box-shadow: 0 8px 30px rgba(61,36,15,0.04); margin-bottom: 10px; }
+  .link-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(61,36,15,0.08); }
+  .link-icon { font-size: 28px; flex-shrink: 0; }
+  .link-text { font-size: 15px; font-weight: 700; color: var(--text); flex: 1; }
+  .link-arrow { font-size: 18px; color: var(--accent); font-weight: 700; }
+  footer { margin-top: 32px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 11.5px; color: var(--muted); display: flex; justify-content: space-between; animation: fadeUp 0.5s ease 0.5s both; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 600px) { .container { padding: 36px 18px 60px; } .summary-card, .news-card { padding: 20px 18px; } .pico-grid { grid-template-columns: 1fr; } footer { flex-direction: column; gap: 6px; text-align: center; } .topic-name { width: 80px; font-size: 11px; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="logo">👴</div>
+    <div class="header-text">
+      <h1>Elder Anxiety Daily &middot; 老年焦慮文獻日報</h1>
+      <div class="header-meta">
+        <span class="badge badge-date">📅 2026年5月31日（週日）</span>
+        <span class="badge badge-count">📊 40 篇文獻</span>
+        <span class="badge badge-source">Powered by PubMed + Zhipu AI</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="summary-card">
+    <h2>📋 今日文獻趨勢</h2>
+    <p class="summary-text">今日文獻亮點在於AI-CBT對老年焦慮效果有限的警訊，以及VR正念介入在老年人中呈現最大效果量的對比發現，顯示數位治療在老年族群需更精準的設計與應用。</p>
+  </div>
+
+  <div class="section"><div class="section-title"><span class="section-icon">⭐</span>今日精選 TOP Picks</div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#1</span>
+            <span class="emoji-icon">🤖</span>
+            <span class="utility-high">高實用性</span>
+          </div>
+          <h3>AI提供認知行為治療對焦慮和憂鬱症狀的療效：系統性文獻回顧</h3>
+          <p class="journal-source">NPJ digital medicine &middot; Efficacy of AI-delivered cognitive behavioral therapy interventions for anxiety and depressive symptoms: a systematic review.</p>
+          <p>AI-CBT對焦慮症狀的療效有限（14項研究中僅1項顯著），且初步證據顯示對老年人效果較差，提醒臨床工作者不應過度依賴AI取代傳統治療。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">有焦慮或憂鬱症狀的成人（含老年人）</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">AI提供的認知行為治療</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">對照組（含等待名單、治療常規等）</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">焦慮和憂鬱症狀的改善程度</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">老年焦慮</span><span class="tag">數位認知行為治療</span><span class="tag">認知行為治療</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42215626/" target="_blank" rel="noopener noreferrer">閱讀原文 &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#2</span>
+            <span class="emoji-icon">📊</span>
+            <span class="utility-high">高實用性</span>
+          </div>
+          <h3>全面性老年照護中與生活品質相關的心理和功能因素：多中心觀察性世代研究</h3>
+          <p class="journal-source">BMC geriatrics &middot; Psychological and functional factors associated with quality of life in comprehensive geriatric care: evidence from a multicenter observational cohort study.</p>
+          <p>在全面性老年評估中，焦慮（β=-0.20）和憂鬱症狀（β=-0.22）是生活品質最強的預測因子，勝過傳統功能變數，顯示心理評估應更受重視。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">接受標準化全面性老年照護的住院患者（n=487）</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">無介入，觀察性研究</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">不同心理社會因素與臨床功能因素的比較</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">WHOQOL-BREF評估的生活品質</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">老年焦慮</span><span class="tag">老年憂鬱症</span><span class="tag">篩檢評估</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42210123/" target="_blank" rel="noopener noreferrer">閱讀原文 &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#3</span>
+            <span class="emoji-icon">🥽</span>
+            <span class="utility-high">高實用性</span>
+          </div>
+          <h3>虛擬實境正念介入對憂鬱和焦慮的影響：薈萃分析</h3>
+          <p class="journal-source">European journal of psychotraumatology &middot; Effects of virtual reality mindfulness interventions on depression and anxiety: a meta-analysis.</p>
+          <p>VR正念介入能顯著降低憂鬱和焦慮症狀，且在老年人族群中效果量最大（SMD=-1.40），為老年焦慮提供創新治療選擇。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">有憂鬱或焦慮症狀的成人（含老年人）</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">VR正念介入</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">對照組（含等待名單、常規照護等）</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">憂鬱和焦慮症狀的改變</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">老年焦慮</span><span class="tag">正念</span><span class="tag">遠距醫療</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42189223/" target="_blank" rel="noopener noreferrer">閱讀原文 &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#4</span>
+            <span class="emoji-icon">📱</span>
+            <span class="utility-high">高實用性</span>
+          </div>
+          <h3>跨越數位鴻溝：社會參與在科技使用與心理健康中的中介角色</h3>
+          <p class="journal-source">Journal of aging and health &middot; Bridging the Digital Divide: The Mediating Role of Social Engagement in Technology Use and Mental Health.</p>
+          <p>互動式通訊科技使用可透過促進社會參與來降低老年人憂鬱和焦慮，但單純資訊型使用無此效果，強調科技「互動性」的關鍵角色。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">美國老年人（n=5,195，來自NHATS 2022）</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">資訊通訊科技（ICT）使用</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">非使用者</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">憂鬱和焦慮症狀</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">老年焦慮</span><span class="tag">社會孤立</span><span class="tag">遠距醫療</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42183818/" target="_blank" rel="noopener noreferrer">閱讀原文 &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#5</span>
+            <span class="emoji-icon">🏥</span>
+            <span class="utility-high">高實用性</span>
+          </div>
+          <h3>老年癌症患者手術後譫妄的術前相關因素：回溯性世代研究</h3>
+          <p class="journal-source">Psychogeriatrics : the official journal of the Japanese Psychogeriatric Society &middot; Preoperative Factors Associated With Postoperative Delirium in Older Patients With Cancer Undergoing Surgery: Retrospective Cohort Study.</p>
+          <p>術前焦慮（HADS-A）是老年癌症患者術後譫妄的獨立預測因子（OR=1.505），強調術前心理篩檢對預防譫妄的重要性。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">接受手術的老年癌症患者（≥65歲，n=195）</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">無介入，回溯性研究</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">發生與未發生術後譫妄的患者</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">術後譫妄發生率</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">老年焦慮</span><span class="tag">篩檢評估</span><span class="tag">失智症</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42175551/" target="_blank" rel="noopener noreferrer">閱讀原文 &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#6</span>
+            <span class="emoji-icon">👨‍👩‍👦</span>
+            <span class="utility-mid">中實用性</span>
+          </div>
+          <h3>失智症對老年人和家庭照顧者雙人組健康結果的調節效應</h3>
+          <p class="journal-source">Nursing research &middot; Moderating Effects of Dementia on Health Outcomes in Dyads of Older Adults and Family Caregivers.</p>
+          <p>失智症狀態會調節老年人正向情緒與自身憂鬱的關係，且照顧者的負面情緒會直接影響受照顧者的憂鬱症狀，揭示雙人互動機制。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">老年人與其主要家庭照顧者雙人組（n=1,560對）</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">無介入，觀察性研究</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">有無失智症的比較</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">雙人組的憂鬱、焦慮和自評健康</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">老年焦慮</span><span class="tag">失智症</span><span class="tag">照顧者負擔</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42206870/" target="_blank" rel="noopener noreferrer">閱讀原文 &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#7</span>
+            <span class="emoji-icon">😴</span>
+            <span class="utility-mid">中實用性</span>
+          </div>
+          <h3>工作年齡和老年人失眠相關因素的差異：夜間和日間症狀的比較</h3>
+          <p class="journal-source">Sleep medicine: X &middot; Differences in insomnia-related factors between working-age and older adults: A comparison of nocturnal and daytime symptoms.</p>
+          <p>老年人失眠症候群主要與睡眠債和疲勞有關，而工作年齡成人則與焦慮強烈相關，顯示老年失眠的評估策略應與年輕人有所不同。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">線上調查參與者（n=1,655），分為工作年齡（30-64歲）和老年人（≥65歲）</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">無介入，橫斷面研究</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">工作年齡與老年人的失眠特徵比較</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">根據ICSD-3標準分類的失眠類型</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">老年焦慮</span><span class="tag">失眠</span><span class="tag">篩檢評估</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42181835/" target="_blank" rel="noopener noreferrer">閱讀原文 &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card featured">
+          <div class="card-header">
+            <span class="rank-badge">#8</span>
+            <span class="emoji-icon">🌍</span>
+            <span class="utility-mid">中實用性</span>
+          </div>
+          <h3>奈及利亞基層診所老年人健康相關生活品質及相關因素：橫斷面研究</h3>
+          <p class="journal-source">BMC primary care &middot; Health-related quality of life and associated factors among older adults attending primary care clinics in Nigeria: a cross-sectional study.</p>
+          <p>在奈及利亞老年人中，憂鬱與生活品質呈中等負相關（r=-0.558），焦慮呈弱至中等負相關（r=-0.353），但靈性需求與生活品質無顯著相關。</p>
+          
+            <div class="pico-grid">
+              <div class="pico-item"><span class="pico-label">P</span><span class="pico-text">奈及利亞基層診所老年人（n=280）</span></div>
+              <div class="pico-item"><span class="pico-label">I</span><span class="pico-text">無介入，橫斷面研究</span></div>
+              <div class="pico-item"><span class="pico-label">C</span><span class="pico-text">不同社會人口學和臨床因素的比較</span></div>
+              <div class="pico-item"><span class="pico-label">O</span><span class="pico-text">WHOQOL-BREF評估的健康相關生活品質</span></div>
+            </div>
+          <div class="card-footer">
+            <span class="tag">老年焦慮</span><span class="tag">跨文化</span><span class="tag">老年護理</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42185961/" target="_blank" rel="noopener noreferrer">閱讀原文 &rarr;</a>
+          </div>
+        </div></div>
+
+  <div class="section"><div class="section-title"><span class="section-icon">📚</span>其他值得關注的文獻</div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">📊</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>偽陽性乳房攝影對生活品質的負面影響：約旦大學醫院的橫斷面研究</h3>
+          <p class="journal-source">Medicine</p>
+          <p>偽陽性乳房攝影結果會顯著降低女性的生活品質，特別是在焦慮和日常功能方面。</p>
+          <div class="card-footer">
+            <span class="tag">健康焦慮</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42216337/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🎵</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>音樂聆聽對老年人福祉的影響：系統性文獻回顧</h3>
+          <p class="journal-source">BMC public health</p>
+          <p>聆聽音樂與改善情緒、情緒調節和降低焦慮一致相關，尤其在壓力、疾病和社會孤立經驗中。</p>
+          <div class="card-footer">
+            <span class="tag">老年焦慮</span><span class="tag">社會孤立</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42215978/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🤖</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>AI輔助教育計畫對頭頸癌老年人心理健康、社會支持和生活品質的影響：隨機對照試驗研究計畫</h3>
+          <p class="journal-source">BMC geriatrics</p>
+          <p>研究計畫評估AI驅動的個人化健康教育是否能改善頭頸癌術後老年患者的心理健康，GAD-7將作為評估指標之一。</p>
+          <div class="card-footer">
+            <span class="tag">老年焦慮</span><span class="tag">遠距醫療</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42215892/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🏃</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>基於TUG的分級多成分運動計畫逆轉社區老年人衰弱的效果：多中心隨機對照試驗</h3>
+          <p class="journal-source">BMC geriatrics</p>
+          <p>TUG分級運動計畫能顯著降低Fried衰弱分數，並改善PHQ-9憂鬱評分和步行速度。</p>
+          <div class="card-footer">
+            <span class="tag">衰弱症</span><span class="tag">老年憂鬱症</span><span class="tag">運動介入</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42215862/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🌏</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>不丹健康相關生活品質的社經和區域不平等：全國代表性橫斷面研究</h3>
+          <p class="journal-source">Journal of global health</p>
+          <p>不丹老年人焦慮/憂鬱問題報告率為14%，且與年齡增長和鄉村居住顯著相關。</p>
+          <div class="card-footer">
+            <span class="tag">老年焦慮</span><span class="tag">跨文化</span><span class="tag">流行病學</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42212593/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🥽</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>擴增實境用於老年人平衡復健：範圍性文獻回顧</h3>
+          <p class="journal-source">Canadian geriatrics journal : CGJ</p>
+          <p>AR介入可作為跌倒預防的輔助工具，能改善步態穩定性和預期性姿勢調整。</p>
+          <div class="card-footer">
+            <span class="tag">跌倒恐懼</span><span class="tag">跌倒</span><span class="tag">遠距醫療</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42211446/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🔗</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>性別特異性憂鬱-焦慮症狀網路與體重狀態的影響：大規模研究洞察</h3>
+          <p class="journal-source">PsyCh journal</p>
+          <p>BMI和性別與憂鬱-焦慮症狀網路結構相關，顯示不同的性別特定模式。</p>
+          <div class="card-footer">
+            <span class="tag">廣泛性焦慮症</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42210799/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">😴</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>基於無監督聚類演算法的阻塞型睡眠呼吸暫停症候群多維度臨床表型</h3>
+          <p class="journal-source">Lin chuang er bi yan hou tou jing wai ke za zhi = Journal of clinical otorhinolaryngology head and neck surgery</p>
+          <p>OSAHS患者可分為四種臨床表型，其中「症狀感知主導型」以情緒和失眠症狀突出為特徵。</p>
+          <div class="card-footer">
+            <span class="tag">失眠</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42208962/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">😤</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>囊性纖維化患者使用Elexacaftor/Tezacaftor/Ivacaftor期間的症狀負擔體驗</h3>
+          <p class="journal-source">Respiratory medicine</p>
+          <p>CF患者目前最困擾的症狀包括便秘/脹氣（48%）、焦慮（44%）和睡眠困難（44%），老年患者報告更嚴重。</p>
+          <div class="card-footer">
+            <span class="tag">廣泛性焦慮症</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42208687/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">📉</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>憂鬱和焦慮對類風濕性關節炎或發炎性腸道疾病患者健康相關生活品質隨時間變化的影響：加拿大前瞻性世代研究</h3>
+          <p class="journal-source">PloS one</p>
+          <p>個體內憂鬱和焦慮症狀增加與心理HRQoL下降相關，疲勞和認知功能惡化與身體HRQoL下降相關。</p>
+          <div class="card-footer">
+            <span class="tag">廣泛性焦慮症</span><span class="tag">多重共病</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42207754/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🔍</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>日本癌症倖存者的資訊尋求模式與溝通偏好：橫斷面分析</h3>
+          <p class="journal-source">JMIR cancer</p>
+          <p>日本癌症倖存者可分為三個潛在類別，女性觀察組對非醫療機構資訊的可靠性評價顯著高於男性。</p>
+          <div class="card-footer">
+            <span class="tag">健康焦慮</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42207161/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🦠</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>輕度COVID-19、重症COVID-19和非COVID重症疾病後的長期認知結果：前瞻性世代比較</h3>
+          <p class="journal-source">Scientific reports</p>
+          <p>輕度COVID-19患者在長期追蹤中報告較高的焦慮（59%）和憂鬱（38%）發生率，高於重症ICU患者。</p>
+          <div class="card-footer">
+            <span class="tag">廣泛性焦慮症</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42204241/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">👤</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>開發定制化人物角色以捕捉老年人內在能力特徵和數位監測意圖：混合方法研究</h3>
+          <p class="journal-source">JMIR aging</p>
+          <p>研究識別出「影響情緒-焦慮迴避者」人物角色，特徵為迴避行為、焦慮、低數位興趣和感知社會孤立。</p>
+          <div class="card-footer">
+            <span class="tag">老年焦慮</span><span class="tag">社會孤立</span><span class="tag">遠距醫療</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42202287/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">❓</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>腹股溝疝氣修補術患者是否表達對修補技術的偏好？他們常問什麼問題？</h3>
+          <p class="journal-source">Hernia : the journal of hernias and abdominal wall surgery</p>
+          <p>61.4%的患者在手術前表達對手術技術的偏好，私人醫院的患者偏好率和資訊滿意度顯著較高。</p>
+          <div class="card-footer">
+            <span class="tag">健康焦慮</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42201563/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🦾</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>機器人輔助全髖關節置換術與傳統手術相比學習曲線更短、植入物精度更高、團隊壓力更低</h3>
+          <p class="journal-source">Journal of robotic surgery</p>
+          <p>機器人輔助手術的學習曲線較短，且主刀醫師和手術團隊的焦慮和壓力評分顯著較低。</p>
+          <div class="card-footer">
+            <span class="tag">健康焦慮</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42201437/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">💉</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>術中亞麻醉劑量艾氯胺酮對乳癌患者術後憂鬱症狀影響的研究計畫：多中心前瞻性隨機對照試驗</h3>
+          <p class="journal-source">BMJ open</p>
+          <p>研究計畫評估術中單次亞麻醉劑量艾氯胺酮是否能降低乳癌患者術後第30天的憂鬱症狀發生率。</p>
+          <div class="card-footer">
+            <span class="tag">老年憂鬱症</span><span class="tag">藥物治療</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42192642/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">👂</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>老年人聽力介入與認知功能的前瞻性縱向觀察研究計畫</h3>
+          <p class="journal-source">BMJ open</p>
+          <p>ARCH研究將比較人工電子耳和助聽器對延緩年齡相關聽力損失伴隨認知衰退的效果，焦慮為次要結果之一。</p>
+          <div class="card-footer">
+            <span class="tag">老年焦慮</span><span class="tag">輕度認知障礙</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42192623/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🥗</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>植物性飲食指數與心理健康：中老年人群的橫斷面研究</h3>
+          <p class="journal-source">European journal of nutrition</p>
+          <p>較高的整體和健康植物性飲食 adherence 與較少的憂鬱症狀、較高的福祉和較低的焦慮相關。</p>
+          <div class="card-footer">
+            <span class="tag">老年焦慮</span><span class="tag">老年憂鬱症</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42191962/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🧠</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>中風前中度體力活動對中風後急性期憂鬱症狀具有保護作用</h3>
+          <p class="journal-source">Scientific reports</p>
+          <p>中風前中度體力活動與中風後3個月較少的憂鬱症狀相關，但與焦慮無顯著關聯。</p>
+          <div class="card-footer">
+            <span class="tag">腦中風</span><span class="tag">老年憂鬱症</span><span class="tag">運動介入</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42191778/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">📋</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>酒精相關肝病特定健康相關生活品質問卷的開發與驗證：CLDQ-ALD</h3>
+          <p class="journal-source">Hepatology communications</p>
+          <p>開發並驗證了CLDQ-ALD量表，包含9個領域，其中「擔憂」領域與憂鬱狀態顯著相關。</p>
+          <div class="card-footer">
+            <span class="tag">健康焦慮</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42190270/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🧘</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>評估Sophrology介入對英國慢性疼痛患者可行性、接受度和潛在影響的先導研究</h3>
+          <p class="journal-source">Journal of evaluation in clinical practice</p>
+          <p>8週Sophrology介入能顯著降低疼痛藥物使用、憂鬱、焦慮和殘障水平。</p>
+          <div class="card-footer">
+            <span class="tag">慢性疼痛</span><span class="tag">正念</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42189101/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">💼</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>與家暴受害者工作之專業人員的心理健康、應對策略和自我照護實踐：量化研究</h3>
+          <p class="journal-source">Scandinavian journal of caring sciences</p>
+          <p>家暴服務專業人員報告輕度憂鬱和廣泛性焦慮症狀，職業倦怠和迴避應對與較高症狀相關。</p>
+          <div class="card-footer">
+            <span class="tag">廣泛性焦慮症</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42186394/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">📉</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>憂鬱症狀是ICU倖存者心理健康受損時健康相關生活品質的關鍵決定因素</h3>
+          <p class="journal-source">Scientific reports</p>
+          <p>PHQ-2篩檢陽性的憂鬱症狀與EQ-5D-5L指數中位數下降0.13和VAS下降12.45分相關，超過臨床和人口學預測因子。</p>
+          <div class="card-footer">
+            <span class="tag">老年憂鬱症</span><span class="tag">篩檢評估</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42185352/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">💰</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>癌症倖存者的經濟困難與疼痛：法國全國性橫斷面分析</h3>
+          <p class="journal-source">Supportive care in cancer : official journal of the Multinational Association of Supportive Care in Cancer</p>
+          <p>經濟困難與疼痛嚴重程度相關（嚴重疼痛OR=2.87），年輕、獨居、有心理困擾的倖存者更脆弱。</p>
+          <div class="card-footer">
+            <span class="tag">廣泛性焦慮症</span><span class="tag">慢性疼痛</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42184033/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🦴</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>脆弱骨頭，強烈執念：停經後骨質疏鬆症正飲食障礙、身體意象和情緒的對照研究</h3>
+          <p class="journal-source">Archives of osteoporosis</p>
+          <p>停經後骨質疏鬆症婦女顯示更明顯的正飲食障礙傾向，但與焦慮、憂鬱或身體滿意度無顯著相關。</p>
+          <div class="card-footer">
+            <span class="tag">健康焦慮</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42183951/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🌡️</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>氣候變遷對奈及利亞和日本脆弱人群的心理健康影響：緊急醫療照護可及性的系統性文獻回顧</h3>
+          <p class="journal-source">Public health in practice (Oxford, England)</p>
+          <p>在日本，熱浪增加老年人中暑發生率，心理健康風險與社會孤立和延遲就醫相關。</p>
+          <div class="card-footer">
+            <span class="tag">老年焦慮</span><span class="tag">社會孤立</span><span class="tag">跨文化</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42182577/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🦵</span>
+            <span class="utility-mid utility-sm">中</span>
+          </div>
+          <h3>神經肌肉運動結合疼痛神經科學教育用於老年女性膝骨關節炎管理：隨機對照試驗研究計畫</h3>
+          <p class="journal-source">Journal of orthopaedic surgery and research</p>
+          <p>研究計畫評估神經肌肉運動結合疼痛神經科學教育是否能降低老年女性膝骨關節炎的疼痛和活動恐懼。</p>
+          <div class="card-footer">
+            <span class="tag">慢性疼痛</span><span class="tag">跌倒恐懼</span><span class="tag">運動介入</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42178552/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">🔪</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>胃切除術前生活品質與胃癌術後併發症的關聯</h3>
+          <p class="journal-source">Supportive care in cancer : official journal of the Multinational Association of Supportive Care in Cancer</p>
+          <p>術前生活品質評估中，焦慮是術後併發症的關鍵預測指標之一，高風險分類為獨立預測因子。</p>
+          <div class="card-footer">
+            <span class="tag">健康焦慮</span><span class="tag">篩檢評估</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42177387/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">⚖️</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>膝骨關節炎中身體活動、心理社會決定因素和症狀結果的性別差異：以拉美裔為主世代研究的橫斷面分析</h3>
+          <p class="journal-source">Rheumatology international</p>
+          <p>女性在身體活動、運動自我效能和社會支持方面顯著低於男性，且功能狀態與更負面的態度和更高知覺障礙相關。</p>
+          <div class="card-footer">
+            <span class="tag">慢性疼痛</span><span class="tag">跌倒恐懼</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42176097/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">⚡</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>裝有永久心臟節律器的老年重鬱症復發患者電痙攣治療：病例報告</h3>
+          <p class="journal-source">PCN reports : psychiatry and clinical neurosciences</p>
+          <p>在多團隊合作和持續監測下，對裝有心臟節律器的80多歲老年重鬱症患者安全執行20次ECT治療，GRID-HAM-D從32分降至2分。</p>
+          <div class="card-footer">
+            <span class="tag">老年憂鬱症</span><span class="tag">藥物治療</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42164249/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">❓</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>感知模糊性與風險信念如何相關？來自縱向和日記資料的證據</h3>
+          <p class="journal-source">Risk analysis : an official publication of the Society for Risk Analysis</p>
+          <p>在新型疾病爆發的兩年間，感知模糊性與風險信念的並存關係從正向轉為負向，顯示悲觀評估和動機推理機制。</p>
+          <div class="card-footer">
+            <span class="tag">健康焦慮</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42144907/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="card-header-row">
+            <span class="emoji-sm">😩</span>
+            <span class="utility-low utility-sm">低</span>
+          </div>
+          <h3>疲勞對慢性B型和C型肝炎患者報告結果和工作生產力的影響：多國登錄研究洞察</h3>
+          <p class="journal-source">Journal of viral hepatitis</p>
+          <p>約五分之一慢性病毒性肝炎患者有疲勞問題，與焦慮、憂鬱顯著相關，且導致PRO和工作生產力下降高達33%。</p>
+          <div class="card-footer">
+            <span class="tag">廣泛性焦慮症</span><span class="tag">多重共病</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42144799/" target="_blank" rel="noopener noreferrer">PubMed &rarr;</a>
+          </div>
+        </div></div>
+
+  <div class="topic-section section"><div class="section-title"><span class="section-icon">📊</span>主題分布</div>
+            <div class="topic-row">
+              <span class="topic-name">老年焦慮</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:100%"></div></div>
+              <span class="topic-count">8</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">數位認知行為治療</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:25%"></div></div>
+              <span class="topic-count">2</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">正念</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:25%"></div></div>
+              <span class="topic-count">2</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">社會孤立</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:38%"></div></div>
+              <span class="topic-count">3</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">篩檢評估</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:50%"></div></div>
+              <span class="topic-count">4</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">失智症</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:25%"></div></div>
+              <span class="topic-count">2</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">照顧者負擔</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:13%"></div></div>
+              <span class="topic-count">1</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">跨文化</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:25%"></div></div>
+              <span class="topic-count">2</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">失眠</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:25%"></div></div>
+              <span class="topic-count">2</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">廣泛性焦慮症</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:75%"></div></div>
+              <span class="topic-count">6</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">健康焦慮</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:75%"></div></div>
+              <span class="topic-count">6</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">慢性疼痛</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:38%"></div></div>
+              <span class="topic-count">3</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">老年憂鬱症</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:63%"></div></div>
+              <span class="topic-count">5</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">衰弱症</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:13%"></div></div>
+              <span class="topic-count">1</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">跌倒恐懼</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:25%"></div></div>
+              <span class="topic-count">2</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">跌倒</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:13%"></div></div>
+              <span class="topic-count">1</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">運動介入</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:38%"></div></div>
+              <span class="topic-count">3</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">多重共病</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:25%"></div></div>
+              <span class="topic-count">2</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">腦中風</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:13%"></div></div>
+              <span class="topic-count">1</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">輕度認知障礙</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:13%"></div></div>
+              <span class="topic-count">1</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">藥物治療</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:25%"></div></div>
+              <span class="topic-count">2</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">遠距醫療</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:50%"></div></div>
+              <span class="topic-count">4</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">老年護理</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:13%"></div></div>
+              <span class="topic-count">1</span>
+            </div>
+            <div class="topic-row">
+              <span class="topic-name">流行病學</span>
+              <div class="topic-bar-bg"><div class="topic-bar" style="width:13%"></div></div>
+              <span class="topic-count">1</span>
+            </div></div>
+
+  <div class="keywords-section section"><div class="section-title"><span class="section-icon">🏷️</span>關鍵字</div><div class="keywords"><span class="keyword">AI-CBT療效</span><span class="keyword">老��焦慮篩檢</span><span class="keyword">VR正念</span><span class="keyword">數位鴻溝</span><span class="keyword">術前焦慮評估</span><span class="keyword">失智症照護雙人模式</span><span class="keyword">老年失眠特徵</span><span class="keyword">跨文化老年心理健康</span></div></div>
+
+  <div class="links-section">
+    <a href="https://www.leepsyclinic.com/" class="link-card" target="_blank" rel="noopener noreferrer">
+      <span class="link-icon">🏥</span>
+      <span class="link-text">李政洋身心診所首頁</span>
+      <span class="link-arrow">&rarr;</span>
+    </a>
+    <a href="https://blog.leepsyclinic.com/" class="link-card" target="_blank" rel="noopener noreferrer">
+      <span class="link-icon">📬</span>
+      <span class="link-text">訂閱電子報</span>
+      <span class="link-arrow">&rarr;</span>
+    </a>
+    <a href="https://buymeacoffee.com/CYlee" class="link-card" target="_blank" rel="noopener noreferrer">
+      <span class="link-icon">☕</span>
+      <span class="link-text">Buy Me a Coffee</span>
+      <span class="link-arrow">&rarr;</span>
+    </a>
+  </div>
+
+  <footer>
+    <span>資料來源：PubMed &middot; 分析模型：Zhipu GLM AI</span>
+    <span><a href="https://github.com/u8901006/elder-anxiety">GitHub</a></span>
+  </footer>
+</div>
+</body>
+</html>
