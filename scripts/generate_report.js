@@ -5,10 +5,10 @@ const fs = require("fs");
 const path = require("path");
 
 const API_BASE =
-  process.env.ZHIPU_API_BASE ||
-  "https://open.bigmodel.cn/api/coding/paas/v4";
-const MODELS = ["glm-5-turbo", "glm-4.7", "glm-4.7-flash"];
-const MAX_TOKENS = 50000;
+  process.env.NVIDIA_API_BASE ||
+  "https://integrate.api.nvidia.com/v1";
+const MODELS = ["nvidia/nemotron-3-super-120b-a12b", "nvidia/nemotron-3-nano-30b-a3b"];
+const MAX_TOKENS = 16384;
 const REQUEST_TIMEOUT = 480000;
 
 const SYSTEM_PROMPT = `你是老年精神醫學領域的資深研究員與科學傳播者，專精於老年焦慮 (late-life anxiety / geriatric anxiety)。你的任務是：
@@ -81,7 +81,7 @@ function parseArgs() {
   const opts = {
     input: "",
     output: "",
-    apiKey: process.env.ZHIPU_API_KEY || "",
+    apiKey: process.env.NVIDIA_API_KEY || "",
   };
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--input" && args[i + 1]) opts.input = args[++i];
@@ -279,9 +279,11 @@ ${papersText}
             { role: "system", content: SYSTEM_PROMPT },
             { role: "user", content: prompt },
           ],
-          temperature: 0.3,
-          top_p: 0.9,
+          temperature: 1.0,
+          top_p: 0.95,
           max_tokens: MAX_TOKENS,
+          stream: false,
+          chat_template_kwargs: { enable_thinking: false },
         });
 
         const resp = await httpsRequest(
@@ -546,7 +548,7 @@ function generateHtml(analysis) {
       <div class="header-meta">
         <span class="badge badge-date">📅 ${dateDisplay}（週${weekday}）</span>
         <span class="badge badge-count">📊 ${totalCount} 篇文獻</span>
-        <span class="badge badge-source">Powered by PubMed + Zhipu AI</span>
+        <span class="badge badge-source">Powered by PubMed + NVIDIA AI</span>
       </div>
     </div>
   </header>
@@ -583,7 +585,7 @@ function generateHtml(analysis) {
   </div>
 
   <footer>
-    <span>資料來源：PubMed &middot; 分析模型：Zhipu GLM AI</span>
+    <span>資料來源：PubMed &middot; 分析模型：NVIDIA Nemotron</span>
     <span><a href="https://github.com/u8901006/elder-anxiety">GitHub</a></span>
   </footer>
 </div>
@@ -598,7 +600,7 @@ async function main() {
 
   if (!opts.apiKey) {
     console.error(
-      "[ERROR] No API key provided. Set ZHIPU_API_KEY env var or use --api-key"
+      "[ERROR] No API key provided. Set NVIDIA_API_KEY env var or use --api-key"
     );
     process.exit(1);
   }
