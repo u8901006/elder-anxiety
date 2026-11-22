@@ -7,7 +7,10 @@ const path = require("path");
 const API_BASE =
   process.env.NVIDIA_API_BASE ||
   "https://integrate.api.nvidia.com/v1";
-const MODELS = ["nvidia/nemotron-3-ultra-550b-a55b"];
+const MODELS = [
+  "nvidia/nemotron-3-ultra-550b-a55b",
+  "mistralai/mistral-large-4-1t-a52b",
+];
 const MAX_TOKENS = 16384;
 const REQUEST_TIMEOUT = 480000;
 
@@ -283,7 +286,9 @@ ${papersText}
           top_p: 0.95,
           max_tokens: MAX_TOKENS,
           stream: false,
-          chat_template_kwargs: { enable_thinking: false },
+          ...(model.startsWith("nvidia/nemotron-") && {
+            chat_template_kwargs: { enable_thinking: false },
+          }),
         });
 
         const resp = await httpsRequest(
