@@ -8,7 +8,7 @@ const API_BASE =
   process.env.NVIDIA_API_BASE ||
   "https://integrate.api.nvidia.com/v1";
 const MODELS = [
-  "nvidia/nemotron-3-ultra-550b-a55b",
+  "nvidia/nemotron-3.5-super-vl-120b-a12b",
   "mistralai/mistral-large-4-1t-a52b",
 ];
 const MAX_TOKENS = 16384;
@@ -102,31 +102,13 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function httpsRequest(url, options, body) {
-  return new Promise((resolve, reject) => {
-    const u = new URL(url);
-    const reqOptions = {
-      hostname: u.hostname,
-      path: u.pathname + u.search,
-      method: options.method || "POST",
-      headers: options.headers || {},
-      timeout: REQUEST_TIMEOUT,
-    };
-    const req = https.request(reqOptions, (res) => {
-      let data = "";
-      res.on("data", (chunk) => (data += chunk));
-      res.on("end", () => {
-        resolve({ statusCode: res.statusCode, body: data });
-      });
-    });
-    req.on("error", reject);
-    req.on("timeout", () => {
-      req.destroy();
-      reject(new Error("Request timeout"));
-    });
-    if (body) req.write(body);
-    req.end();
+async function httpsRequest(url, options, body) {
+  const response = await fetch(url, {
+    ...options,
+    body,
+    signal: AbortSignal.timeout(REQUEST_TIMEOUT),
   });
+  return { statusCode: response.status, body: await response.text() };
 }
 
 function safeParseJSON(text) {
