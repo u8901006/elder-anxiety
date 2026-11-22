@@ -2,6 +2,7 @@
 
 const https = require("https");
 const fs = require("fs");
+const { setTimeout: delay } = require("node:timers/promises");
 const path = require("path");
 
 const PUBMED_SEARCH =
@@ -93,7 +94,13 @@ function httpsGet(url) {
     const req = https.get(url, { headers: HEADERS, timeout: 30000 }, (res) => {
       let data = "";
       res.on("data", (chunk) => (data += chunk));
-      res.on("end", () => resolve(data));
+      res.on("end", () => {
+        if (res.statusCode < 200 || res.statusCode >= 300) {
+          reject(new Error(`HTTP ${res.statusCode}`));
+          return;
+        }
+        resolve(data);
+      });
     });
     req.on("error", reject);
     req.on("timeout", () => {
@@ -121,7 +128,13 @@ function httpsPost(url, body) {
     const req = https.request(options, (res) => {
       let data = "";
       res.on("data", (chunk) => (data += chunk));
-      res.on("end", () => resolve(data));
+      res.on("end", () => {
+        if (res.statusCode < 200 || res.statusCode >= 300) {
+          reject(new Error(`HTTP ${res.statusCode}`));
+          return;
+        }
+        resolve(data);
+      });
     });
     req.on("error", reject);
     req.on("timeout", () => {
@@ -172,26 +185,31 @@ async function searchPapers(query, retmax = 40) {
     retmode: "json",
   });
   const url = `${PUBMED_SEARCH}?${params.toString()}`;
-  try {
-    const data = await httpsGet(url);
-    const json = JSON.parse(data);
-    return json?.esearchresult?.idlist || [];
-  } catch (e) {
-    console.error(`[ERROR] PubMed search failed: ${e.message}`);
-    return [];
-  }
+  const data = await httpsGet(url);
+  const json = JSON.parse(data);
+  const pmids = json?.esearchresult?.idlist;
+  if (!Array.isArray(pmids)) throw new Error("Invalid PubMed search response");
+  return pmids;
 }
 
 async function fetchDetails(pmids) {
-  if (!pmids.length) return [];
-  const ids = pmids.join(",");
-  const params = `db=pubmed&id=${ids}&retmode=xml`;
-  try {
-    const xmlData = await httpsPost(PUBMED_FETCH, params);
-    return parseXml(xmlData);
-  } catch (e) {
-    console.error(`[ERROR] PubMed fetch failed: ${e.message}`);
-    return [];
+  const params = new URLSearchParams({
+    db: "pubmed",
+    id: pmids.join(","),
+    retmode: "xml",
+  });
+
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const xmlData = await httpsPost(PUBMED_FETCH, params.toString());
+      const papers = parseXml(xmlData);
+      if (!papers.length) throw new Error("PubMed returned no article records for matching PMIDs");
+      return papers;
+    } catch (error) {
+      if (attempt === 3) throw error;
+      console.warn(`[WARN] PubMed detail fetch attempt ${attempt} failed: ${error.message}`);
+      await delay(attempt * 1000);
+    }
   }
 }
 
@@ -286,15 +304,20 @@ async function main() {
 
   const queries = buildQueries(opts.days);
   const allPmids = new Set();
+  let searchError;
 
   for (const query of queries) {
     try {
       const pmids = await searchPapers(query, opts.maxPapers);
       pmids.forEach((id) => allPmids.add(id));
     } catch (e) {
+      searchError = e;
       console.error(`[WARN] Query failed, continuing: ${e.message}`);
     }
+    await delay(350);
   }
+
+  if (allPmids.size === 0 && searchError) throw searchError;
 
   const uniquePmids = [...allPmids].slice(0, opts.maxPapers);
   console.error(
